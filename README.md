@@ -26,37 +26,37 @@ import * as loansSdk from "plutodao-loans-sdk";
 
 The loans-sdk will export the following functions:
 
-```ts
+```js
 getLoanIntent(server: ApiStellarNetwork, borrower: string, entryBalance: BalanceDto)
 ```
 
 Returns a loan intent transaction XDR
 
-```ts
+```js
 getLoanStatus(server: ApiStellarNetwork, borrower: string)
 ```
 
 Returns the loan status
 
-```ts
+```js
 getSettleDebtIntent(server: ApiStellarNetwork, borrower: string, debtCancellationAsset: ILoanAssetRequest)
 ```
 
 Returns a repay withdraw collateral intent transaction XDR to be signed by the borrower to cancel the remaining debt
 
-```ts
+```js
 getWithdrawCollateralIntent(server: ApiStellarNetwork, borrower: string)
 ```
 
 Returns a withdraw collateral intent transaction XDR to be signed by the borrower once the loan has paid itself
 
-```ts
+```js
 sendLoan(server: ApiStellarNetwork, borrower: string, loanSignedTransaction: string)
 ```
 
 Submits a signed loan intent transaction XDR to get a loan
 
-```ts
+```js
 sendWithdrawCollateral(server: ApiStellarNetwork, borrower: string, withdrawCollateralSignedXdr: string)
 ```
 
