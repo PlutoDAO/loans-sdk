@@ -1,0 +1,36 @@
+{
+  "name": "plutodao-loans-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "clean": "rd /s /q esm dist lib .cache>nul 2>&1|echo.>nul",
+    "build": "tsc",
+    "build:c": "npm run clean && tsc",
+    "prepack": "npm run build",
+    "test": "vitest src",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PlutoDAO/loans-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PlutoDAO/loans-sdk/issues"
+  },
+  "homepage": "https://github.com/PlutoDAO/loans-sdk#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@vitest/coverage-c8": "^0.30.1",
+    "jsdom": "^21.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "vitest": "^0.30.1"
+  }
+}
