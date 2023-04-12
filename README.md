@@ -64,7 +64,7 @@ Submits a signed withdraw collateral intent transaction XDR to withdraw the loan
 
 ## Types
 
-The loans-sdk will export the following types:
+### The loans-sdk will export the following types:
 
 #### ILoanAssetRequest
 
