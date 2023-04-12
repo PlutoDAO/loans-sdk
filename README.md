@@ -92,7 +92,7 @@ interface ILoanStatusResponse {
 
 #### IBalanceDto
 
-An object representing the required info to determine how much will be the loan
+An object representing the required info to determine which asset is used to take the loan and how much will be the amount
 
 ```ts
 interface IBalanceDto {
