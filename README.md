@@ -24,7 +24,7 @@ import * as loansSdk from "plutodao-loans-sdk";
 
 ## SDK
 
-The loans-sdk will export the following functions:
+### The loans-sdk will export the following functions:
 
 ```js
 getLoanIntent(server: ApiStellarNetwork, borrower: string, entryBalance: BalanceDto)
