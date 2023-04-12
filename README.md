@@ -24,35 +24,47 @@ import * as loansSdk from "plutodao-loans-sdk";
 
 ## SDK
 
-The loans-sdk will export the following functions:
+### The loans-sdk will export the following functions:
 
-#### `getLoanIntent(server: ApiStellarNetwork, borrower: string, entryBalance: BalanceDto)`
+```js
+getLoanIntent(server: ApiStellarNetwork, borrower: string, entryBalance: BalanceDto)
+```
 
 Returns a loan intent transaction XDR
 
-#### `getLoanStatus(server: ApiStellarNetwork, borrower: string)`
+```js
+getLoanStatus(server: ApiStellarNetwork, borrower: string)
+```
 
 Returns the loan status
 
-#### `getSettleDebtIntent(server: ApiStellarNetwork, borrower: string, debtCancellationAsset: ILoanAssetRequest)`
+```js
+getSettleDebtIntent(server: ApiStellarNetwork, borrower: string, debtCancellationAsset: ILoanAssetRequest)
+```
 
 Returns a repay withdraw collateral intent transaction XDR to be signed by the borrower to cancel the remaining debt
 
-#### `getWithdrawCollateralIntent(server: ApiStellarNetwork, borrower: string)`
+```js
+getWithdrawCollateralIntent(server: ApiStellarNetwork, borrower: string)
+```
 
 Returns a withdraw collateral intent transaction XDR to be signed by the borrower once the loan has paid itself
 
-#### `sendLoan(server: ApiStellarNetwork, borrower: string, loanSignedTransaction: string)`
+```js
+sendLoan(server: ApiStellarNetwork, borrower: string, loanSignedTransaction: string)
+```
 
 Submits a signed loan intent transaction XDR to get a loan
 
-#### `sendWithdrawCollateral(server: ApiStellarNetwork, borrower: string, withdrawCollateralSignedXdr: string)`
+```js
+sendWithdrawCollateral(server: ApiStellarNetwork, borrower: string, withdrawCollateralSignedXdr: string)
+```
 
 Submits a signed withdraw collateral intent transaction XDR to withdraw the loan collateral
 
 ## Types
 
-The loans-sdk will export the following types:
+### The loans-sdk will export the following types:
 
 #### ILoanAssetRequest
 
@@ -80,7 +92,7 @@ interface ILoanStatusResponse {
 
 #### IBalanceDto
 
-An object representing the required info to determine how much will be the loan
+An object representing the required info to determine which asset is used to take the loan and how much will be the amount
 
 ```ts
 interface IBalanceDto {
