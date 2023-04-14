@@ -8,10 +8,10 @@
         "lib/**/*"
     ],
     "scripts": {
-        "clean": "del /q /s lib",
-        "clean:ga": "rm -rf lib",
-        "build": "npm run clean && tsc",
-        "build:ga": "npm run clean:ga && tsc",
+        "clean:w": "del /q /s lib",
+        "clean": "rm -rf lib",
+        "build:w": "npm run clean && tsc",
+        "build": "npm run clean:ga && tsc",
         "prepack": "npm run build",
         "test": "vitest src",
         "test:watch": "npm run test -- --watch"

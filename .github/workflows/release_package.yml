@@ -1,0 +1,88 @@
+name: Release package
+on:
+    workflow_dispatch:
+        inputs:
+            release-type:
+                description: 'Release type (one of): patch, minor, major, prepatch, preminor, premajor, prerelease'
+                required: true
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2.3.4
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                  registry-url: https://registry.npmjs.org/
+                  node-version: '14'
+            - name: Git configuration
+              run: |
+                  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "GitHub Actions"
+            - name: Cache node modules
+              uses: actions/cache@v2
+              id: npm-cache
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: |
+                      node_modules
+                      package-lock.json
+                  key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-modules-
+                      ${{ runner.os }}-build-${{ env.cache-name }}-
+                      ${{ runner.os }}-build-
+                      ${{ runner.os }}-
+            - name: Install Dependencies if cache invalid
+              if: steps.npm-cache.outputs.cache-hit != 'true'
+              run: npm install
+            - name: Bump release version
+              if: startsWith(github.event.inputs.release-type, 'pre') != true
+              run: |
+                  echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_TYPE)" >> $GITHUB_ENV
+                  echo "RELEASE_TAG=latest" >> $GITHUB_ENV
+              env:
+                  RELEASE_TYPE: ${{ github.event.inputs.release-type }}
+            - name: Bump pre-release version
+              if: startsWith(github.event.inputs.release-type, 'pre')
+              run: |
+                  echo "NEW_VERSION=$(npm --no-git-tag-version --preid=beta version $RELEASE_TYPE
+                  echo "RELEASE_TAG=beta" >> $GITHUB_ENV
+              env:
+                  RELEASE_TYPE: ${{ github.event.inputs.release-type }}
+            - name: Update changelog
+              uses: superfaceai/release-changelog-action@v1
+              with:
+                  path-to-changelog: CHANGELOG.md
+                  version: ${{ env.NEW_VERSION }}
+                  operation: release
+            - name: Commit CHANGELOG.md and package.json changes and create tag
+              run: |
+                  git add "package.json"
+                  git add "CHANGELOG.md"
+                  git commit -m "chore: release ${{ env.NEW_VERSION }}"
+                  git tag ${{ env.NEW_VERSION }}
+            - name: Publish
+              run: yarn publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
+            - name: Create pull request
+              uses: peter-evans/create-pull-request@v5
+              with:
+                  commit-message: 'chore: release ${{ env.NEW_VERSION }}'
+                  title: 'chore: release ${{ env.NEW_VERSION }}'
+                  branch: 'release-${{ env.NEW_VERSION }}'
+                  base: 'main'
+                  body: ${{ steps.get-changelog.outputs.changelog }}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Update GitHub release documentation
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: ${{ env.NEW_VERSION }}
+                  body: ${{ steps.get-changelog.outputs.changelog }}
+                  prerelease: ${{ startsWith(github.event.inputs.release-type, 'pre') }}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
