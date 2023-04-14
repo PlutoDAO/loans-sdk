@@ -19,7 +19,7 @@ npm i plutodao-loans-sdk
 2. import/require into your project:
 
 ```js
-import * as loansSdk from "plutodao-loans-sdk";
+import * as loansSdk from 'plutodao-loans-sdk';
 ```
 
 ## SDK
@@ -62,42 +62,62 @@ sendWithdrawCollateral(server: ApiStellarNetwork, borrower: string, withdrawColl
 
 Submits a signed withdraw collateral intent transaction XDR to withdraw the loan collateral
 
-## Types
+## Classes
 
-### The loans-sdk will export the following types:
+### The loans-sdk will export the following classes:
 
-#### ILoanAssetRequest
+#### LoanAssetRequest
 
-An object representing the asset required for the API
+A class representing the asset required for the API
 
 ```ts
-interface ILoanAssetRequest {
-  isNative: boolean;
-  code: string;
-  issuer: string;
+class LoanAssetRequest implements ILoanAssetRequest {
+    public code: string;
+    public issuer: string;
+    public isNative: boolean;
+    constructor(assetCode: string, assetIssuer: string, isNative: boolean) {
+        this.code = assetCode;
+        this.issuer = assetIssuer;
+        this.isNative = isNative;
+    }
 }
 ```
 
-#### ILoanStatusResponse
+#### LoanStatusResponse
 
-An object representing the status of a loan
+A class representing the status of a loan
 
 ```ts
-interface ILoanStatusResponse {
-  percentagePaid: number;
-  remainingDebt: number;
-  userTotalYusdcInVault: number;
+class LoanStatusResponse implements ILoanStatusResponse {
+    public percentagePaid: number;
+    public remainingDebt: number;
+    public userTotalYusdcInVault: number;
+
+    constructor(
+        percentagePaid: number,
+        remainingDebt: number,
+        userTotalYusdcInVault: number,
+    ) {
+        this.percentagePaid = percentagePaid;
+        this.remainingDebt = remainingDebt;
+        this.userTotalYusdcInVault = userTotalYusdcInVault;
+    }
 }
 ```
 
-#### IBalanceDto
+#### BalanceDto
 
-An object representing the required info to determine which asset is used to take the loan and how much will be the amount
+A class representing the required info to determine which asset is used to take the loan and how much will be the amount
 
 ```ts
-interface IBalanceDto {
-  asset: LoanAssetRequest;
-  amount: string;
+class BalanceDto implements IBalanceDto {
+    public asset: LoanAssetRequest;
+    public amount: string;
+
+    constructor(asset: LoanAssetRequest, amount: string) {
+        this.asset = asset;
+        this.amount = amount;
+    }
 }
 ```
 
@@ -105,19 +125,19 @@ interface IBalanceDto {
 
 #### To take a loan
 
-- XLM
-- YXLM
-- PUSD
-- USDC
-- YUSDC
-- ARS
-- ARST
-- AQUA
-- BTC
-- ETH
+-   XLM
+-   YXLM
+-   PUSD
+-   USDC
+-   YUSDC
+-   ARS
+-   ARST
+-   AQUA
+-   BTC
+-   ETH
 
 #### To settle the debt
 
-- PUSD
-- USDC
-- YUSDC
+-   PUSD
+-   USDC
+-   YUSDC
