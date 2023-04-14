@@ -9,4 +9,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-Remove types section for the readme file and adding a classes section instead
+-   Remove types section for the readme file and adding a classes section instead
