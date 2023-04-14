@@ -1,9 +1,9 @@
 import ILoanStatusResponse from './types/ILoanStatusResponse';
 
 export class LoanStatusResponse implements ILoanStatusResponse {
-    percentagePaid: number;
-    remainingDebt: number;
-    userTotalYusdcInVault: number;
+    public percentagePaid: number;
+    public remainingDebt: number;
+    public userTotalYusdcInVault: number;
 
     constructor(
         percentagePaid: number,
