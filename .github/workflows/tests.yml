@@ -9,24 +9,16 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        needs: install-cache
+
+        strategy:
+            matrix:
+                node-version: [14.x, 16.x, 18.x]
+
         steps:
-            - uses: actions/checkout@v2
-            - name: Setup Node.js
-              uses: actions/setup-node@v2
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
               with:
-                  node-version: 16
-            - name: Restore npm dependencies
-              uses: actions/cache@v2
-              id: npm-cache
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-build-${{ env.cache-name }}-
-                      ${{ runner.os }}-build-
-                      ${{ runner.os }}-
-            - name: Run the tests
-              run: |
-                  npm install
-                  npm run test
+                  node-version: ${{ matrix.node-version }}
+            - run: npm install
+            - run: npm test
