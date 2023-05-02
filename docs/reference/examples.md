@@ -13,40 +13,6 @@ List of accepted assets
 -   BTC
 -   ETH
 
-Objects
-
-```javascript
-import type ILoanAssetRequest from './types/ILoanAssetRequest';
-
-export class LoanAssetRequest implements ILoanAssetRequest {
-    public code: string;
-    public issuer: string;
-    public isNative: boolean;
-    constructor(assetCode: string, assetIssuer: string, isNative: boolean) {
-        this.code = assetCode;
-        this.issuer = assetIssuer;
-        this.isNative = isNative;
-    }
-}
-```
-
-```javascript
-import { LoanAssetRequest } from './LoanAssetRequest';
-import type IBalanceDto from './types/IBalanceDto';
-
-export class BalanceDto implements IBalanceDto {
-    public asset: LoanAssetRequest;
-    public amount: string;
-
-    constructor(asset: LoanAssetRequest, amount: string) {
-        this.asset = asset;
-        this.amount = amount;
-    }
-}
-```
-
-Examples
-
 ```javascript
 // First we need to get the XDR that will be signed by the borrower
 
