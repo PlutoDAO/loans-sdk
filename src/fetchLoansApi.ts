@@ -1,5 +1,6 @@
 import config from './config';
 import { ApiStellarNetwork } from './ApiStellarNetwork';
+import { RequestError } from './errors';
 
 export default async function fetchLoansApi<T>(
     server: ApiStellarNetwork,
@@ -24,5 +25,9 @@ export default async function fetchLoansApi<T>(
         body: body ? JSON.stringify(body) : null,
     });
 
-    return result;
+    if (result.ok) {
+        return result;
+    } else {
+        throw new RequestError(await result.text());
+    }
 }

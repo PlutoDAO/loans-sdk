@@ -6,6 +6,8 @@ See the [accepted assets](#accepted-assets) for taking a loan and settle the deb
 
 This project is built using Typescript, and vitest for unit testing
 
+See the [examples](docs/reference/examples.md) to use the SDK
+
 ## Quick start
 
 ### Install
@@ -75,6 +77,7 @@ class LoanAssetRequest implements ILoanAssetRequest {
     public code: string;
     public issuer: string;
     public isNative: boolean;
+
     constructor(assetCode: string, assetIssuer: string, isNative: boolean) {
         this.code = assetCode;
         this.issuer = assetIssuer;
