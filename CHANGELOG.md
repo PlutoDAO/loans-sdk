@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
--   Fix README
--   Add error handling for failed requests
+- Fix README
+- Add error handling for failed requests
 
 ## 1.0.1 - 2023-04-14
 
 ### Changed
 
--   Remove types section for the readme file and adding a classes section instead
+- Remove types section for the readme file and adding a classes section instead
