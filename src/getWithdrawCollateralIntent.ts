@@ -20,5 +20,9 @@ export async function getWithdrawCollateralIntent(
         },
     );
 
-    return result.json();
+    if (result.ok) {
+        return result.json();
+    } else {
+        throw new Error('get_withdraw_intent_error');
+    }
 }

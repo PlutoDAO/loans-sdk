@@ -19,5 +19,9 @@ export async function getLoanIntent(
         entryBalance,
     });
 
-    return result.json();
+    if (result.ok) {
+        return result.json();
+    } else {
+        throw new Error('get_loan_intent_error');
+    }
 }
