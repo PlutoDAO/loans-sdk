@@ -24,5 +24,9 @@ export async function getSettleDebtIntent(
         },
     );
 
-    return result.json();
+    if (result.ok) {
+        return result.json();
+    } else {
+        throw new Error('get_settle_debt_intent_error');
+    }
 }
