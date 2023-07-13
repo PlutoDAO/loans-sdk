@@ -7,32 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.2.1 - 2023-07-13
 ### Added
-
--   Update public server url
+- Update public server url
 
 ### Fixed
-
--   Throw errors
+- Throw errors
 
 ## 1.2.0 - 2023-05-19
-
 ### Changed
-
--   LoanAssetRequest class
+- LoanAssetRequest class
 
 ## 1.1.0 - 2023-05-05
-
 ### Added
-
--   Add error handling for failed requests
+- Add error handling for failed requests
 
 ### Fixed
-
--   Fix README
+- Fix README
 
 ## 1.0.1 - 2023-04-14
-
 ### Changed
-
--   Remove types section for the readme file and adding a classes section instead
+- Remove types section for the readme file and adding a classes section instead
