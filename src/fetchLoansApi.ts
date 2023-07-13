@@ -16,7 +16,7 @@ export default async function fetchLoansApi<T>(
         apiUrl = config.testnetServerUrl;
     }
 
-    const result = await fetch(`${apiUrl}/${endpoint}`, {
+    return await fetch(`${apiUrl}/${endpoint}`, {
         method,
         headers: {
             Accept: 'application/json',
@@ -24,10 +24,4 @@ export default async function fetchLoansApi<T>(
         },
         body: body ? JSON.stringify(body) : null,
     });
-
-    if (result.ok) {
-        return result;
-    } else {
-        throw new RequestError(await result.text());
-    }
 }

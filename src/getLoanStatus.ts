@@ -14,5 +14,9 @@ export async function getLoanStatus(
 ): Promise<ILoanStatusResponse> {
     const result = await fetchLoansApi(server, `loan/${borrower}`, 'GET');
 
-    return result.json();
+    if (result.ok) {
+        return result.json();
+    } else {
+        throw new Error('get_loan_status_error');
+    }
 }
